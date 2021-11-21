@@ -41,6 +41,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        // $request->validate([
+        //     'name' => 'max:255',
+        //     'cpf_cnpj' => 'unique|max:255',
+        //     'email' => 'unique|max:255',
+        //     'password' => 'max:255',
+        // ]);
+
+        // $user = new User;
+        // $user->name = $request->name;
+        // $user->cpf_cnpj = $request->cpf_cnpj;
+        // $user->email = $request->email;
+        // $user->password = $request->password;
+
+        // if($user->save()){
+        //     return new UserResource($user);
+        // }
     }
 
     /**
