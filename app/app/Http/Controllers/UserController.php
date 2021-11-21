@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Http;
+
 class UserController extends Controller
 {
     /**
@@ -62,7 +64,66 @@ class UserController extends Controller
      */
     public function transaction(Request $request)
     {
-        var_dump($request->value); exit();
+        //var_dump($request->value); exit();
+        $payer = User::findOrFail($request->payer);
+        $payee = User::findOrFail($request->payee);
+
+        echo "Total before transaction:";
+        echo "   ";
+        echo $payer->total_value;
+        echo "   ";
+        echo $payee->total_value;
+        echo "   ";
+        // var_dump($payer->total_value);
+        // var_dump($payee->total_value);
+
+        if($payer->type == 'regular') {
+            if($payer->total_value - $request->value >= 0) {
+                $response = Http::get('https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6');
+                $response->json();
+                //var_dump($response['message']);
+                if ($response['message'] == 'Autorizado') {
+                    $response2 = Http::get('http://o4d9z.mocklab.io/notify');
+                    $response2->json();
+                    //var_dump($response2['message']);
+
+                    if ($response2['message'] == 'Success') {
+                        $payee->total_value += $request->value;
+                        $payee->save();
+
+                        $payer->total_value -= $request->value;
+                        $payer->save();
+
+                        echo "Transaction done";
+                        echo "   ";
+
+                        echo "Total after transaction:";
+                        echo "   ";
+                        echo $payer->total_value;
+                        echo "   ";
+                        echo $payee->total_value;
+                        echo "   ";
+                        // var_dump($payer->total_value);
+                        // var_dump($payee->total_value);
+                    } else {
+                        // Tratar
+                        echo "Fail 2nd Mock";
+                    }
+                } else {
+                    // Tratar
+                    echo "Fail 1st Mock";
+                }
+            } else {
+                // Tratar
+                echo "Not enough money";
+            }
+        } else {
+            // Tratar
+            echo "Sellers can't send money";
+        }       
+
+        exit();
+
         //
         // $user = User::findOrFail($id);
         // return new UserResource($user);
