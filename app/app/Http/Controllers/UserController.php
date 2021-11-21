@@ -68,12 +68,12 @@ class UserController extends Controller
         $payer = User::findOrFail($request->payer);
         $payee = User::findOrFail($request->payee);
 
-        echo "Total before transaction:";
-        echo "   ";
-        echo $payer->total_value;
-        echo "   ";
-        echo $payee->total_value;
-        echo "   ";
+        // echo "Total before transaction:";
+        // echo "   ";
+        // echo $payer->total_value;
+        // echo "   ";
+        // echo $payee->total_value;
+        // echo "   ";
         // var_dump($payer->total_value);
         // var_dump($payee->total_value);
 
@@ -94,32 +94,73 @@ class UserController extends Controller
                         $payer->total_value -= $request->value;
                         $payer->save();
 
-                        echo "Transaction done";
-                        echo "   ";
+                        // echo "Transaction done";
+                        // echo "   ";
 
-                        echo "Total after transaction:";
-                        echo "   ";
-                        echo $payer->total_value;
-                        echo "   ";
-                        echo $payee->total_value;
-                        echo "   ";
+                        // echo "Total after transaction:";
+                        // echo "   ";
+                        // echo $payer->total_value;
+                        // echo "   ";
+                        // echo $payee->total_value;
+                        // echo "   ";
+
                         // var_dump($payer->total_value);
                         // var_dump($payee->total_value);
+
+                        return response()->json([
+                            'success' => 'true',
+                            'message' => new UserResource($payer),
+                        ]);
+
+                        
                     } else {
                         // Tratar
-                        echo "Fail 2nd Mock";
+                        // echo "Fail 2nd Mock";
+                        //abort(403, 'Fail 2nd Mock');
+                        // return response()->json([
+                        //     'error_message' => 'Fail 2nd Mock',
+                        // ]);
+                        return response()->json([
+                            'success' => 'false',
+                            'message' => 'Fail 2nd Mock',
+                        ]);
                     }
                 } else {
                     // Tratar
-                    echo "Fail 1st Mock";
+                    // echo "Fail 1st Mock";
+                    //abort(403, 'Fail 1st Mock');
+                    // return response()->json([
+                    //     'error_message' => 'Fail 1st Mock',
+                    // ]);
+                    return response()->json([
+                        'success' => 'false',
+                        'message' => 'Fail 1st Mock',
+                    ]);
                 }
             } else {
                 // Tratar
-                echo "Not enough money";
+                //echo "Not enough money";
+                //abort(403, 'Not enough money');
+                // return response()->json([
+                //     'error_message' => 'Not enough money',
+                // ]);
+                return response()->json([
+                    'success' => 'false',
+                    'message' => 'Not enough money',
+                ]);
             }
         } else {
             // Tratar
-            echo "Sellers can't send money";
+            // echo "Sellers are not allowed to send money";
+            //abort(403, 'Sellers are not allowed to send money');
+            // return response()->json([
+            //     'error_message' => 'Sellers are not allowed to send money',
+            // ]);
+            return response()->json([
+                'success' => 'false',
+                'message' => 'Sellers are not allowed to send money',
+            ]);
+
         }       
 
         exit();
