@@ -1,0 +1,1 @@
+FROM postman/newman:alpine
