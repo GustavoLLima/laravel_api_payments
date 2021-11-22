@@ -29,6 +29,8 @@ Route::get('user/{id}', [UserController::class, 'show']);
 // Transaction
 Route::post('user/transaction', [UserController::class, 'transaction']);
 
+Route::post('user/transaction2', [UserController::class, 'transaction2']);
+
 // Create new user
 // Route::post('user', [UserController::class, 'store']);
 

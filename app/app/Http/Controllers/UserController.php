@@ -78,6 +78,66 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
+    public function transaction2(Request $request)
+    {
+        $payer = User::find($request->payer);
+        if ($payer === null) {
+            return response()->json([
+                'message' => 'Payer not found',
+            ], 404);
+        }
+        $payee = User::find($request->payee);
+        if ($payee === null) {
+            return response()->json([
+                'message' => 'Payee not found',
+            ], 404);
+        }
+
+        if($payer->type != 'regular'){
+            return response()->json([
+                'message' => 'Sellers are not allowed to send money',
+            ], 400);
+        }
+
+        if($payer->total_value - $request->value < 0){
+            return response()->json([
+                'message' => 'Not enough money',
+            ], 400);
+        }
+
+        $response = Http::get('https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6');
+        $response->json();
+
+        if ($response['message'] != 'Autorizado'){
+            return response()->json([
+                'message' => 'Fail 1st Mock',
+            ], 400);
+        }
+
+        $response2 = Http::get('http://o4d9z.mocklab.io/notify');
+        $response2->json();
+
+        if ($response2['message'] != 'Success'){
+            return response()->json([
+                'message' => 'Fail 2nd Mock',
+            ]);
+        }
+
+        $payee->total_value += $request->value;
+        $payee->save();
+
+        $payer->total_value -= $request->value;
+        $payer->save();
+
+        return response()->json([new UserResource($payer)], 200);
+    }
+
+    /**
+     * Transaction
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
     public function transaction(Request $request)
     {
         //var_dump($request->value); exit();
