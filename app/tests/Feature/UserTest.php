@@ -13,7 +13,7 @@ class UserTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_users_list_if_exists()
+    public function test_users_list_if_exists_t2()
     {
         $response = $this->get('/api/users/');
 
@@ -27,7 +27,7 @@ class UserTest extends TestCase
         $response->assertNotFound();
     }
 
-    public function test_users_transaction_not_enough_money()
+    public function test_users_transaction_not_enough_money_t2()
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
@@ -47,7 +47,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_users_transaction_seller_cant_send_money()
+    public function test_users_transaction_seller_cant_send_money_t2()
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
@@ -67,7 +67,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_users_transaction_success()
+    public function test_users_transaction_success_t2()
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
@@ -83,115 +83,93 @@ class UserTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // public function test_users_list_if_exists()
-    // {
-    //     $response = $this->get('/api/users/');
+    public function test_users_list_if_exists_t1()
+    {
+        $response = $this->get('/api/users/');
 
-    //     $response->assertJson(["data" => []]);
+        $response->assertJson(["data" => []]);
 
-    //     // $playlists = Playlist::all();
-    //     // $this->assertCount(1, $playlists);
+        // $playlists = Playlist::all();
+        // $this->assertCount(1, $playlists);
 
-    //     // $response = $this->get('/api/v1/playlists');
+        // $response = $this->get('/api/v1/playlists');
 
-    //     // $response->assertStatus(200);
-    // }
+        // $response->assertStatus(200);
+    }
 
-    // public function test_user_not_found()
-    // {
-    //     $response = $this->get('/api/user/500');
+    public function test_user_not_found_t1()
+    {
+        $response = $this->get('/api/user/500');
 
-    //     $response->assertNotFound();
+        $response->assertNotFound();
 
-    //     // $playlists = Playlist::all();
-    //     // $this->assertCount(1, $playlists);
+        // $playlists = Playlist::all();
+        // $this->assertCount(1, $playlists);
 
-    //     // $response = $this->get('/api/v1/playlists');
+        // $response = $this->get('/api/v1/playlists');
 
-    //     // $response->assertStatus(200);
-    // }
+        // $response->assertStatus(200);
+    }
 
-    // public function test_users_transaction_not_enough_money()
-    // {
-    //     $response = $this->get('/api/user/1');
-    //     $response->assertOk();
-    //     $response = $this->get('/api/user/5');
-    //     $response->assertOk();
+    public function test_users_transaction_not_enough_money_t1()
+    {
+        $response = $this->get('/api/user/1');
+        $response->assertOk();
+        $response = $this->get('/api/user/5');
+        $response->assertOk();
 
-    //     $response = $this->postJson('/api/user/transaction', [
-    //         'value' => '10000',
-    //         'payer' => 1,
-    //         'payee' => 5
-    //     ]);
+        $response = $this->postJson('/api/user/transaction', [
+            'value' => '10000',
+            'payer' => 1,
+            'payee' => 5
+        ]);
 
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertJson([
-    //             'success' => 'false',
-    //             "message" => "Not enough money"
-    //     ]);
-    // }
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => 'false',
+                "message" => "Not enough money"
+        ]);
+    }
 
-    // public function test_users_transaction_seller_cant_send_money()
-    // {
-    //     $response = $this->get('/api/user/1');
-    //     $response->assertOk();
-    //     $response = $this->get('/api/user/5');
-    //     $response->assertOk();
+    public function test_users_transaction_seller_cant_send_money_t1()
+    {
+        $response = $this->get('/api/user/1');
+        $response->assertOk();
+        $response = $this->get('/api/user/5');
+        $response->assertOk();
 
-    //     $response = $this->postJson('/api/user/transaction', [
-    //         'value' => '10',
-    //         'payer' => 5,
-    //         'payee' => 1
-    //     ]);
+        $response = $this->postJson('/api/user/transaction', [
+            'value' => '10',
+            'payer' => 5,
+            'payee' => 1
+        ]);
 
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertJson([
-    //             'success' => 'false',
-    //             'message' => 'Sellers are not allowed to send money',
-    //     ]);
-    // }
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => 'false',
+                'message' => 'Sellers are not allowed to send money',
+        ]);
+    }
 
-    // public function test_users_transaction_success()
-    // {
-    //     $response = $this->get('/api/user/1');
-    //     $response->assertOk();
-    //     $response = $this->get('/api/user/5');
-    //     $response->assertOk();
+    public function test_users_transaction_success_t1()
+    {
+        $response = $this->get('/api/user/1');
+        $response->assertOk();
+        $response = $this->get('/api/user/5');
+        $response->assertOk();
 
-    //     $response = $this->postJson('/api/user/transaction', [
-    //         'value' => '10',
-    //         'payer' => 1,
-    //         'payee' => 5
-    //     ]);
+        $response = $this->postJson('/api/user/transaction', [
+            'value' => '10',
+            'payer' => 1,
+            'payee' => 5
+        ]);
 
-    //     $response
-    //         ->assertStatus(200)
-    //         ->assertJson([
-    //             'success' => 'true'
-    //     ]);
-    // }
-
-
-
-
-
-
-
-
-
-    // /**
-    //  * A basic feature test example.
-    //  *
-    //  * @return void
-    //  */
-    // public function test_example()
-    // {
-    //     $response = $this->get('/');
-
-    //     $response->assertStatus(200);
-    // }
-
-
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => 'true'
+        ]);
+    }
 }
