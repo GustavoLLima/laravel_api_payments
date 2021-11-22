@@ -57,6 +57,10 @@ Se tudo ocorreu corretamente, o projeto estará disponível na máquina host, at
 
 http://localhost/
 
+O SGBD pode ser acessado (utilizando as credenciais MYSQL_USER/MYSQL_PASSWORD) em:
+
+http://localhost:8080/
+
 A documentação da API, desenvolvida no Swagger, pode ser acessada em:
 
 http://localhost/api/documentation
