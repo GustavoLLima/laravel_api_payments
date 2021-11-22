@@ -9,5 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+	/** @OA\Server(url="http://localhost/api/") */
+	/** @OA\Info(title="Users/Transactions API", version="0.1") */
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

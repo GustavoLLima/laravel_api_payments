@@ -15,6 +15,26 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    /**
+    * @OA\Get(
+
+    *  path="/users",
+
+    *  tags={"Users"},
+
+    *  summary="Users list",
+
+    *  @OA\Response(response="200",
+
+    *    description="List of users with pagination",
+
+    *  )
+
+    * )
+
+    */
+
     public function index()
     {
         //
@@ -60,6 +80,43 @@ class UserController extends Controller
     }
 
     /**
+    * @OA\Get(
+
+    *  path="/user/{user}",
+
+    *  tags={"Users"},
+
+    *  operationId="user_id",
+
+    *  summary="Single user show",
+
+    *  @OA\Response(response="200",
+
+    *    description="User show",
+
+    *  ),
+
+    *  @OA\Parameter(name="user",
+
+    *    in="path",
+
+    *    required=true,
+
+    *    @OA\Schema(type="integer")
+
+    *  ),
+
+    *  @OA\Response(response="404",
+
+    *    description="User not found",
+
+    *  )
+
+    * )
+
+    */
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
@@ -71,6 +128,67 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return new UserResource($user);
     }
+
+    /**
+    * @OA\Post(
+
+    *  path="/user/transaction2",
+
+    *  tags={"Users"},
+
+    *  summary="Money transferation between users",
+
+    *  @OA\Parameter(name="value",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="number")
+
+    *  ),
+
+    *  @OA\Parameter(name="payer",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="integer")
+
+    *  ),
+
+    *  @OA\Parameter(name="payee",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="integer")
+
+    *  ),
+
+    *  @OA\Response(response="200",
+
+    *    description="Transfer completed, return the payer and payee attributes on a json",
+
+    *  ),
+
+    *  @OA\Response(response="404",
+
+    *    description="Payer or payee not found",
+
+    *  ),
+
+    *  @OA\Response(response="400",
+
+    *    description="Something went wrong with the transaction, check message for details",
+
+    *  ),
+
+    * )
+
+    */
 
     /**
      * Transaction
@@ -129,8 +247,63 @@ class UserController extends Controller
         $payer->total_value -= $request->value;
         $payer->save();
 
-        return response()->json([new UserResource($payer)], 200);
+        return response()->json([new UserResource($payer), new UserResource($payee)], 200);
     }
+
+    /**
+    * @OA\Post(
+
+    *  path="/user/transaction",
+
+    *  tags={"Users"},
+
+    *  summary="Money transferation between users",
+
+    *  @OA\Parameter(name="value",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="number")
+
+    *  ),
+
+    *  @OA\Parameter(name="payer",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="integer")
+
+    *  ),
+
+    *  @OA\Parameter(name="payee",
+
+    *    in="query",
+
+    *    required=true,
+
+    *    @OA\Schema(type="integer")
+
+    *  ),
+
+    *  @OA\Response(response="200",
+
+    *    description="Check success value. If it's true, the transfer is completed, also it returns the payer and payee attributes on a json format. If it's false, something went wrong with the transaction, check message for details.",
+
+    *  ),
+
+    *  @OA\Response(response="404",
+
+    *    description="Payer or payee not found",
+
+    *  ),
+
+    * )
+
+    */
 
     /**
      * Transaction
@@ -185,7 +358,7 @@ class UserController extends Controller
 
                         return response()->json([
                             'success' => 'true',
-                            'message' => new UserResource($payer),
+                            'message' => [new UserResource($payer), new UserResource($payee)],
                         ]);
 
                         

@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Users/Transactions API",
+        "version": "0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Users list",
+                "operationId": "7e2f5799553ec93c9c43e2a58490d447",
+                "responses": {
+                    "200": {
+                        "description": "List of users with pagination"
+                    }
+                }
+            }
+        },
+        "/user/{user}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Single user show",
+                "operationId": "user_id",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User show"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/user/transaction2": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Money transferation between users",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "payer",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "payee",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transfer completed, return the payer and payee attributes on a json"
+                    },
+                    "404": {
+                        "description": "Payer or payee not found"
+                    },
+                    "400": {
+                        "description": "Something went wrong with the transaction, check message for details"
+                    }
+                }
+            }
+        },
+        "/user/transaction": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Money transferation between users",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "payer",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "payee",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Check success value. If it's true, the transfer is completed, also it returns the payer and payee attributes on a json format. If it's false, something went wrong with the transaction, check message for details."
+                    },
+                    "404": {
+                        "description": "Payer or payee not found"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
