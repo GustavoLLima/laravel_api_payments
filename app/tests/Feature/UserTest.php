@@ -31,13 +31,13 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
 
         $response = $this->postJson('/api/user/transaction2', [
             'value' => '10000',
             'payer' => 1,
-            'payee' => 5
+            'payee' => 2
         ]);
 
         $response
@@ -51,12 +51,12 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
 
         $response = $this->postJson('/api/user/transaction2', [
             'value' => '10',
-            'payer' => 5,
+            'payer' => 2,
             'payee' => 1
         ]);
 
@@ -71,13 +71,13 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
         
         $response = $this->postJson('/api/user/transaction2', [
             'value' => '10',
             'payer' => 1,
-            'payee' => 5
+            'payee' => 2
         ]);
 
         $response->assertStatus(200);
@@ -115,13 +115,13 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
 
         $response = $this->postJson('/api/user/transaction', [
             'value' => '10000',
             'payer' => 1,
-            'payee' => 5
+            'payee' => 2
         ]);
 
         $response
@@ -136,12 +136,12 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
 
         $response = $this->postJson('/api/user/transaction', [
             'value' => '10',
-            'payer' => 5,
+            'payer' => 2,
             'payee' => 1
         ]);
 
@@ -157,13 +157,13 @@ class UserTest extends TestCase
     {
         $response = $this->get('/api/user/1');
         $response->assertOk();
-        $response = $this->get('/api/user/5');
+        $response = $this->get('/api/user/2');
         $response->assertOk();
 
         $response = $this->postJson('/api/user/transaction', [
             'value' => '10',
             'payer' => 1,
-            'payee' => 5
+            'payee' => 2
         ]);
 
         $response
