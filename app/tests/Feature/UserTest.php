@@ -88,13 +88,6 @@ class UserTest extends TestCase
         $response = $this->get('/api/users/');
 
         $response->assertJson(["data" => []]);
-
-        // $playlists = Playlist::all();
-        // $this->assertCount(1, $playlists);
-
-        // $response = $this->get('/api/v1/playlists');
-
-        // $response->assertStatus(200);
     }
 
     public function test_user_not_found_t1()
@@ -102,13 +95,6 @@ class UserTest extends TestCase
         $response = $this->get('/api/user/500');
 
         $response->assertNotFound();
-
-        // $playlists = Playlist::all();
-        // $this->assertCount(1, $playlists);
-
-        // $response = $this->get('/api/v1/playlists');
-
-        // $response->assertStatus(200);
     }
 
     public function test_users_transaction_not_enough_money_t1()

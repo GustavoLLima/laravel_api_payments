@@ -30,12 +30,3 @@ Route::get('user/{id}', [UserController::class, 'show']);
 Route::post('user/transaction', [UserController::class, 'transaction']);
 
 Route::post('user/transaction2', [UserController::class, 'transaction2']);
-
-// Create new user
-// Route::post('user', [UserController::class, 'store']);
-
-// // Update user
-// Route::put('user/{id}', [UserController::class, 'update']);
-
-// // Delete user
-// Route::delete('user/{id}', [UserController::class,'destroy']);
