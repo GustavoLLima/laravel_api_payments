@@ -25,7 +25,7 @@ ps: Se for no windows, pode necessário adicionar a pasta no "file sharing resou
 3 - Abrir um terminal interativo com o container do servidor web para executar todos os comandos seguintes:
 
 ```
-docker exec --it php-apache /bin/bash
+docker exec -it php-apache /bin/bash
 ```
 
 4 - Uma vez que a estrutura esteja montada, instalar os pacotes necessários para rodar o projeto:
