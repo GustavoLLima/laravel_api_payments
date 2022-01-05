@@ -1,4 +1,4 @@
-Projeto de estudo para montar uma API no laravel8, utilizando infra montada no Docker.
+Projeto de estudo para montar uma API no laravel8, utilizando infra montada no Docker. O projeto trata de uma API que faz transações financeiras entre usuários. Os usuários do tipo comprador podem enviar dinheiro (desde que tenham saldo suficiente) para usuários do tipo vendedor, já o contrário não pode ocorrer. Antes da transação ocorrer, uma API fictícia é consultada, e depois, outra API fictícia é utilizada simulando o envio de um email de confirmação.
 
 A estrutura das pastas é a seguinte:
 
