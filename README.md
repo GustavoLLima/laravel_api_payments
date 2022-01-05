@@ -31,7 +31,7 @@ docker exec -it php-apache /bin/bash
 4 - Uma vez que a estrutura esteja montada, instalar os pacotes necessários para rodar o projeto:
 
 ```
-compose install
+composer install
 ```
 
 5 - Alterar o arquivo .env (pode ser copiando o example: cp .env.example .env) e alterar essas linhas:
