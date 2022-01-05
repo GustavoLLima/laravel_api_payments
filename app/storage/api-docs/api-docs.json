@@ -51,7 +51,7 @@
                 }
             }
         },
-        "/user/transaction2": {
+        "/user/transaction": {
             "post": {
                 "tags": [
                     "Users"
@@ -92,48 +92,6 @@
                     },
                     "400": {
                         "description": "Something went wrong with the transaction, check message for details"
-                    }
-                }
-            }
-        },
-        "/user/transaction": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Money transferation between users",
-                "parameters": [
-                    {
-                        "name": "value",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "number"
-                        }
-                    },
-                    {
-                        "name": "payer",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "payee",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Check success value. If it's true, the transfer is completed, also it returns the payer and payee attributes on a json format. If it's false, something went wrong with the transaction, check message for details."
-                    },
-                    "404": {
-                        "description": "Payer or payee not found"
                     }
                 }
             }
