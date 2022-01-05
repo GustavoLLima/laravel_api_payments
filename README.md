@@ -53,7 +53,7 @@ php artisan route:cache
 php artisan migrate:fresh --seed
 ```
 
-Se tudo ocorreu corretamente, o projeto estará disponível na máquina host, através do endereço:
+Se tudo ocorreu corretamente, a home do Laravel estará disponível na máquina host, através do endereço:
 
 http://localhost/
 
@@ -64,6 +64,8 @@ http://localhost:8080/
 A documentação da API, desenvolvida no Swagger, pode ser acessada em:
 
 http://localhost/api/documentation
+
+As rotas podem ser acessadas pelo Postman ou qualquer outra ferramenta de teste de API, através das rotas indicadas na documentação.
 
 Os testes já montados para a API podem ser executados através do comando (novamente, através de um bash interativo no container do servidor web):
 ```
